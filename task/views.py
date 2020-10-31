@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .forms import CreateTaskForm
+from .models import Task
 
 
 def tasks(request):
@@ -17,4 +18,11 @@ def create(request):
 
 
 def task(request, pk):
-	return render(request, 'task/task.html')
+	task = Task.objects.get(task_id=pk)
+	task_id = task.task_id
+	task_password = task.task_password
+	context = {
+	'id': task_id,
+	'password': task_password,
+	}
+	return render(request, 'task/task.html', context)

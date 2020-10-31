@@ -8,7 +8,8 @@
 	<h1>Create Task</h1><br>
 	<form method='post'>
 		{% csrf_token %}
-		{{ form.as_p}}
+		<p>Id:{{ form.task_id }}</p>
+		<p>Password:{{ form.task_password }}</p>
 		<button type='submit'>Создать</button>
 	</form>
 {% endblock %}

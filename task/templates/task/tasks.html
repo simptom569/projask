@@ -1,12 +1,25 @@
 {% extends 'task/base.html' %}
+{% load static %}
 
 {% block head %}
 	<title>My Task</title>
+	<link rel="stylesheet" href="{% static 'task/tasks.css' %}">
 {% endblock %}
 
 {% block body %}
-	<h1>My Task</h1>
-	{% for i in task %}
-		<p>{{ i }}</p>
-	{% endfor %}
+	<h1 align="center">My Task</h1>
+	<div class="cards">
+		{% for i in task %}
+			<a href="{% url 'task' pk=i.task_id %}">
+				<div class="card">
+					<div class="name">
+						<h3>{{ i.task_name }}</h3>
+					</div>
+					<div class="id">
+						<h6>{{ i.task_id }}</h6>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
 {% endblock %}

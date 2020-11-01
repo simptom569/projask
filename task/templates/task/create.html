@@ -1,15 +1,18 @@
 {% extends 'task/base.html' %}
+{% load static %}
 
 {% block head %}
 	<title>create task</title>
+	<link rel="stylesheet" href="{% static 'task/create.css' %}">
 {% endblock %}
 
 {% block body %}
 	<h1>Create Task</h1><br>
 	<form method='post'>
 		{% csrf_token %}
-		<p>Id:{{ form.task_id }}</p>
-		<p>Password:{{ form.task_password }}</p>
+		{{ form.task_id }}<br>
+		{{ form.task_name }}<br>
+		{{ form.task_password }}<br>
 		<button type='submit'>Создать</button>
 	</form>
 {% endblock %}

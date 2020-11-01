@@ -1,0 +1,39 @@
+.card{
+	display: inline-block;
+	width: 225px;
+	height: 300px;
+	background: linear-gradient(45deg, #29d9d0, #29d99b);
+	border: 2px solid black;
+	border-radius: 10px;
+	margin-bottom: 20px;
+	margin-right: 10px;
+}
+
+.name h3{
+	color: #4e5752;
+}
+
+.name{
+	text-align: center;
+	padding-top: 100px;
+}
+
+.id h6{
+	color: #4e5752;
+}
+
+.id{
+	text-align: center;
+}
+
+.cards{
+	text-align: center;
+}
+
+body{
+	background-color: black;
+}
+
+h1{
+	color: white;
+}

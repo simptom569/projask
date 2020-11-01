@@ -4,6 +4,7 @@ from uuid import uuid4
 
 class Task(models.Model):
 	task_id = models.CharField(primary_key=True, default=uuid4, max_length=50)
+	task_name = models.CharField(max_length=50)
 	task_password = models.CharField(default=None, max_length=50)
 	
 	def __str__(self):

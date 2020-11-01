@@ -6,4 +6,7 @@
 
 {% block body %}
 	<h1>My Task</h1>
+	{% for i in task %}
+		<p>{{ i }}</p>
+	{% endfor %}
 {% endblock %}

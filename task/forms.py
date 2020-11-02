@@ -23,6 +23,15 @@ class CreateTaskForm(forms.ModelForm):
 		}),
 		}
 
-	'''def __init__(self, *args, **kwargs):
-		super(CreateTaskForm, self).__init__(*args, **kwargs)
-		self.fields['task_id'].disabled = True'''
+
+class ConnectionToTaskForm(forms.Form):
+	task_id = forms.CharField(widget=forms.TextInput(attrs={
+	'placeholder': 'id',
+	'class': 'connect_task',
+	'autocomplete': 'off'
+	}))
+	task_password = forms.CharField(widget=forms.TextInput(attrs={
+	'placeholder': 'password',
+	'class': 'connect_task',
+	'autocomplete': 'off'
+	}))

@@ -7,6 +7,15 @@
 {% endblock %}
 
 {% block body %}
+	<header class="header">
+		<div class="account">
+			<span>Id:{{ user.id }}</span>
+		</div>
+		<nav class="nav">
+			<span><a href="{% url 'create' %}">Создать таск</a></span>
+			<span><a href="{% url 'connect' %}">Подключиться к таску</a></span>
+		</nav>
+	</header>
 	<h1 align="center">My Task</h1>
 	<div class="cards">
 		{% for i in task %}

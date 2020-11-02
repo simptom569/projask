@@ -1,0 +1,36 @@
+body{
+	background-color: black;
+	color: white;
+	text-align: center;
+}
+
+.connect_task{
+	width: 250px;
+	height: 25px;
+	text-align: center;
+	margin-bottom: 20px;
+	border: 2px solid #2fcc7d;
+	transition: 0.25s;
+	outline: none;
+	border-radius: 20px;
+}
+
+.connect_task:focus{
+	width: 300px;
+	border: 2px solid #2fccc4;
+}
+
+button{
+	height: 30px;
+	border-radius: 20px;
+	width: 150px;
+	background-color: black;
+	color: white;
+	border: 2px solid #2fcc7d;
+	transition: 0.25s;
+}
+
+button:hover{
+	border: 2px solid #2fccc4;
+	width: 250px;
+}

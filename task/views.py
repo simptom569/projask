@@ -21,7 +21,9 @@ def create(request):
 	if request.method == 'POST':
 		form = CreateTaskForm(request.POST)
 		if form.is_valid():
-			form.save()
+			form = form.save()
+			user = Users.objects.get(user_id=request.user.id)
+			user.user_task.add(form)
 	form = CreateTaskForm()
 	context = {'form': form}
 	return render(request, 'task/create.html', context)

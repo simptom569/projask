@@ -10,13 +10,16 @@ class CreateTaskForm(forms.ModelForm):
 		'task_password': forms.TextInput(attrs={
 		'class': 'create_task',
 		'placeholder': 'password',
+		'autocomplete': 'off',
 		}),
 		'task_id': forms.TextInput(attrs={
 		'class': 'create_task',
+		'readonly': 'readonly',
 		}),
 		'task_name': forms.TextInput(attrs={
 		'class': 'create_task',
 		'placeholder': 'name',
+		'autocomplete': 'off',
 		}),
 		}
 

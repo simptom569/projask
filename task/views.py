@@ -63,3 +63,30 @@ def connect(request):
 	'error': error,
 	}
 	return render(request, 'task/connect.html', context)
+
+
+def connect_id(request, pk):
+	pk = pk
+	error = ''
+	if request.method == 'POST':
+		print(0)
+		form = ConnectionToTaskForm(request.POST)
+		form.task_id = pk
+		form.save()
+		if form.is_valid():
+			print(1)
+			try:
+				task = Task.objects.get(task_id=pk)
+				if task.task_password == request.POST['task_password']:
+					user = User.objects.get(user_id=request.user.id)
+					user.user_task.add(task)
+				else:
+					error = 'Wrong password'
+			except Task.DoesNotExist:
+				error = 'Task does not exist'
+	form = ConnectionToTaskForm()
+	context = {
+	'form': form,
+	'error': error,
+	}
+	return render(request, 'task/connect_id.html', context)

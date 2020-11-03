@@ -1,0 +1,19 @@
+{% extends 'task/base.html' %}
+{% load static %}
+
+{% block head %}
+	<title>Connections</title>
+	<link rel="stylesheet" href="{% static 'task/connect_id.css' %}">
+{% endblock %}
+
+{% block body %}
+	<h1>Connections to task</h1>
+	{% if error != '' %}
+		{{ error }}
+	{% endif %}
+	<form method="post">
+		{% csrf_token %}
+		{{ form.task_password }}<br>
+		<button type="submit">Connect</button>
+	</form>
+{% endblock %}

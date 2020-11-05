@@ -6,18 +6,18 @@ from .models import Task, Users
 
 
 def tasks(request):
+	if request.user.is_anonymous:
+		return redirect('main')
 	user = request.user.id
-	try:
-		user = Users.objects.get(user_id=user)
-	except:
-		user = Users(user_id=user, user_password='12345')
-		user.save()
+	user = Users.object.get(user_id=user)
 	user = user.user_task.all()
 	context = {'task': user}
 	return render(request, 'task/tasks.html', context)
 
 
 def create(request):
+	if request.user.is_anonymous:
+		return redirect('main')
 	if request.method == 'POST':
 		form = CreateTaskForm(request.POST)
 		if form.is_valid():
@@ -50,6 +50,8 @@ def task(request, pk):
 
 
 def connect(request):
+	if request.user.is_anonymous:
+		return redirect('main')
 	error = ''
 	if request.method == 'POST':
 		form = ConnectionToTaskForm(request.POST)
@@ -72,6 +74,8 @@ def connect(request):
 
 
 def connect_id(request, pk):
+	if request.user.is_anonymous:
+		return redirect('main')
 	pk = pk
 	error = ''
 	if request.method == 'POST':

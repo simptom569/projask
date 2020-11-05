@@ -1,7 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib.auth.models import User
-from .forms import CreateTaskForm, ConnectionToTaskForm
+from .forms import CreateTaskForm, ConnectionToTaskForm, ConnectionToTaskIdForm
 from .models import Task, Users
 
 
@@ -30,9 +30,15 @@ def create(request):
 
 
 def task(request, pk):
+	if request.user.is_anonymous:
+		return redirect('main')
 	try:
 		task = Task.objects.get(task_id=pk)
 		task_id = task.task_id
+		user = Users.objects.get(user_id=request.user.id)
+		user = user.user_task.values_list('task_id', flat=True)
+		if not task_id in user:
+			return redirect('connect_id', pk=pk)
 		task_password = task.task_password
 		context = {
 		'id': task_id,
@@ -69,22 +75,19 @@ def connect_id(request, pk):
 	pk = pk
 	error = ''
 	if request.method == 'POST':
-		print(0)
-		form = ConnectionToTaskForm(request.POST)
-		form.task_id = pk
-		form.save()
+		form = ConnectionToTaskIdForm(request.POST)
 		if form.is_valid():
-			print(1)
 			try:
 				task = Task.objects.get(task_id=pk)
 				if task.task_password == request.POST['task_password']:
-					user = User.objects.get(user_id=request.user.id)
+					user = Users.objects.get(user_id=request.user.id)
 					user.user_task.add(task)
+					return redirect('task', pk=pk)
 				else:
 					error = 'Wrong password'
 			except Task.DoesNotExist:
 				error = 'Task does not exist'
-	form = ConnectionToTaskForm()
+	form = ConnectionToTaskIdForm()
 	context = {
 	'form': form,
 	'error': error,

@@ -28,10 +28,18 @@ class ConnectionToTaskForm(forms.Form):
 	task_id = forms.CharField(widget=forms.TextInput(attrs={
 	'placeholder': 'id',
 	'class': 'connect_task',
-	'autocomplete': 'off'
+	'autocomplete': 'off',
 	}))
 	task_password = forms.CharField(widget=forms.TextInput(attrs={
 	'placeholder': 'password',
 	'class': 'connect_task',
-	'autocomplete': 'off'
+	'autocomplete': 'off',
+	}))
+
+
+class ConnectionToTaskIdForm(forms.Form):
+	task_password = forms.CharField(widget=forms.TextInput(attrs={
+	'placeholder': 'password',
+	'class': 'connect_task',
+	'autocomplete': 'off',
 	}))

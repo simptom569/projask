@@ -1,0 +1,15 @@
+{% extends 'authentication/base.html' %}
+
+{% block head %}
+	<title>Sign_up</title>
+{% endblock %}
+
+{% block body %}
+	<h1>Sign_up</h1>
+	<form method='post'>
+		{% csrf_token %}
+		{{ form.user_name }}<br>
+		{{ form.user_password }}<br>
+		<button type='submit'>Зарегестрироваться</button>
+	</form>
+{% endblock %}

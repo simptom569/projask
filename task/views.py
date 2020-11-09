@@ -9,7 +9,7 @@ def tasks(request):
 	if request.user.is_anonymous:
 		return redirect('main')
 	user = request.user.id
-	user = Users.object.get(user_id=user)
+	user = Users.objects.get(user_id=user)
 	user = user.user_task.all()
 	context = {'task': user}
 	return render(request, 'task/tasks.html', context)
@@ -90,7 +90,7 @@ def connect_id(request, pk):
 				else:
 					error = 'Wrong password'
 			except Task.DoesNotExist:
-				error = 'Task does not exist'
+				raise Http404('Task does not exist')
 	form = ConnectionToTaskIdForm()
 	context = {
 	'form': form,

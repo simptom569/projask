@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from uuid import uuid4
 
 
@@ -18,3 +19,12 @@ class Users(models.Model):
 	
 	def __str__(self):
 		return str(self.user_id)
+
+
+class Messages(models.Model):
+	id = models.CharField(primary_key=True, default=uuid4, max_length=50)
+	message = models.TextField()
+	author = models.ForeignKey(Users)
+	task = models.ForeignKey(Task)
+	reply = models.ForeignKey(Messages)
+	date = models.DateTimeField(default=timezone.now)

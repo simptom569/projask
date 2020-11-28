@@ -22,9 +22,12 @@ class Users(models.Model):
 
 
 class Messages(models.Model):
-	id = models.CharField(primary_key=True, default=uuid4, max_length=50)
+	message_id = models.CharField(primary_key=True, default=uuid4, max_length=50)
 	message = models.TextField()
-	author = models.ForeignKey(Users)
-	task = models.ForeignKey(Task)
-	reply = models.ForeignKey(Messages)
+	author = models.ForeignKey(Users, on_delete=models.CASCADE)
+	task = models.ForeignKey(Task, on_delete=models.CASCADE)
+	reply = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
 	date = models.DateTimeField(default=timezone.now)
+
+	def __str__(self):
+		return str(self.message)

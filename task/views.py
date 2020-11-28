@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import Http404
 from django.contrib.auth.models import User
 from .forms import CreateTaskForm, ConnectionToTaskForm, ConnectionToTaskIdForm
-from .models import Task, Users
+from .models import Task, Users, Messages
 
 
 def tasks(request):
@@ -34,6 +34,8 @@ def task(request, pk):
 		return redirect('main')
 	try:
 		task = Task.objects.get(task_id=pk)
+		message = Messages.objects.filter(task__task_id=pk)
+		print(message)
 		task_id = task.task_id
 		user = Users.objects.get(user_id=request.user.id)
 		user = user.user_task.values_list('task_id', flat=True)
@@ -47,6 +49,11 @@ def task(request, pk):
 	except Task.DoesNotExist:
 		raise Http404("Task does not exist")
 	return render(request, 'task/task.html', context)
+
+
+def update(request, pk):
+	task = Task.objects.get(task_id=pk)
+	task_id = task.task_id
 
 
 def connect(request):

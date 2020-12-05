@@ -24,6 +24,7 @@ def create(request):
 			form = form.save()
 			user = Users.objects.get(user_id=request.user.id)
 			user.user_task.add(form)
+			redirect('task_id', pk=request.POST['task_id'])
 	form = CreateTaskForm()
 	context = {'form': form}
 	return render(request, 'task/create.html', context)
@@ -45,6 +46,7 @@ def task(request, pk):
 		context = {
 		'id': task_id,
 		'password': task_password,
+		'message': message,
 		}
 	except Task.DoesNotExist:
 		raise Http404("Task does not exist")

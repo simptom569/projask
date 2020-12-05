@@ -8,4 +8,11 @@
 	<h1>Task</h1>
 	<p>{{ id }}</p>
 	<p>{{ password }}</p>
+	{% for i in message %}
+		<div class="message">
+			<p>{{ i.author.user_name }}</p>
+			<p>{{ i.message }}</p>
+			<p>{{ i.date }}</p>
+		</div>
+	{% endfor %}
 {% endblock %}

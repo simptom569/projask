@@ -19,7 +19,7 @@ def sign_in(request):
 		form = SignInForm(request.POST)
 		if form.is_valid():
 			try:
-				sign_user = Users.objects.get(user_id=request.POST['user_id'])
+				sign_user = Users.objects.get(user_name=request.POST['user_name'])
 				if sign_user.user_password == request.POST['user_password']:
 					user_name = User.objects.get(id=sign_user.user_id).username
 					sign_user = authenticate(request, username=user_name, password=sign_user.user_password)

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.contrib.auth.models import User
 from .forms import CreateTaskForm, ConnectionToTaskForm, ConnectionToTaskIdForm
 from .models import Task, Users, Messages
@@ -37,6 +37,10 @@ def task(request, pk):
 		task = Task.objects.get(task_id=pk)
 		message = Messages.objects.filter(task__task_id=pk)
 		print(message)
+		if request.is_ajax():
+			task = Task.objects.get(task_id=pk)
+			message = Messages.objects.filter(task__task_id=pk)
+			return JsonResponse({'data': message})
 		task_id = task.task_id
 		user = Users.objects.get(user_id=request.user.id)
 		user = user.user_task.values_list('task_id', flat=True)

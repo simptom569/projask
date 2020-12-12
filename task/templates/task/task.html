@@ -2,17 +2,39 @@
 
 {% block head %}
 	<title>Task</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 {% endblock %}
 
 {% block body %}
 	<h1>Task</h1>
 	<p>{{ id }}</p>
 	<p>{{ password }}</p>
-	{% for i in message %}
+	<!--{% for i in message %}
 		<div class="message">
 			<p>{{ i.author.user_name }}</p>
 			<p>{{ i.message }}</p>
 			<p>{{ i.date }}</p>
 		</div>
-	{% endfor %}
+	{% endfor %}-->
+	<div class="value_style"  id="content"></div>
+
+
+<script>
+function show()
+     {
+         $.ajax({
+             url:  '{% url 'task' pk=id %}',
+             dataType: 'json',
+             success: function(html){
+                 $("#content").html(html);
+             }
+         });
+     }
+
+     $(document).ready(
+     	function(){
+         show();
+         setInterval('show()',1000);
+     });
+ </script>
 {% endblock %}

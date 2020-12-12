@@ -24,9 +24,16 @@ function show()
      {
          $.ajax({
              url:  '{% url 'task' pk=id %}',
+             data: {
+            'inputValue': 0
+            },
              dataType: 'json',
              success: function(html){
-                 $("#content").html(html);
+             	for (var i in html) {
+             		$("#content").append(`<p id='name'>${i.user_name}</p>`);
+             		$("#content").append(`<p id='message'>${i.message}</p>`);
+             		$("#content").append(`<p id='date'>${i.date}</p>`);
+             	}
              }
          });
      }
